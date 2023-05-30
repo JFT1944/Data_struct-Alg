@@ -15,30 +15,31 @@ class BinarySearchTree {
    * Returns the tree. Uses iteration. */
 
   insert(val) {
-    let newNOde = new Node(val)
-    if (!this.root){this.root = newNOde}
-    let node = this.root 
-    while(node){
-      console.log(node.val)
-      if (node.val >= val){
-        node = node.left
-        if(!node.left && node.val >= val){
-          node.left = newNOde
-        } else {
-          node.right = newNOde
-        }
-      } else {
-        node = node.right
-        if(!node.right && null.val < val){
-          node.right = newNOde
-        } else {
-          node.left = newNOde
-        }
-      }
     
-    
-    
+    let newNode = new Node(val);
+    if (!this.root) {
+      this.root = newNode;
+      return this;
     }
+    let current = this.root;
+    while (true) {
+      if (val === current.val) return undefined;
+      if (val < current.val) {
+        if (current.left === null) {
+          current.left = newNode;
+          return this;
+        } 
+        current = current.left;
+      } else {
+        if (current.right === null) {
+          current.right = newNode;
+          return this;
+        } 
+        current = current.right;
+      }
+    }
+
+
 
 
   }
@@ -48,19 +49,88 @@ class BinarySearchTree {
 
   insertRecursively(val) {
 
+    let newNode = new Node(val);
+    if (!this.root) {
+      this.root = newNode;
+      return this;
+  } 
+    let current = this.root;
+    function helper(current) {
+      if (val === current.val) return undefined;
+      if (val < current.val) {
+        if (current.left === null) {
+          current.left = newNode;
+          return this;
+        }
+        current = current.left;
+      } else {
+        if (current.right === null) {
+          current.right = newNode;
+          return this;
+        }
+        current = current.right;
+      }
+      helper(current);
+    }
+    helper(current);
+    return this;
   }
-
   /** find(val): search the tree for a node with value val.
    * return the node, if found; else undefined. Uses iteration. */
 
   find(val) {
 
+      if(!this.root){
+        return undefined
+      }
+      if(this.root === val){
+        return this.root
+      }
+      let current = this.root
+      while(true){
+        if(current.val === val){
+          return current
+        } else if(current.val < val){
+          current = current.left
+        } else if(current.val >= val){
+          current = current.right
+        } else {
+          return undefined
+        }
+      }
+      return undefined
+
   }
+
+    
 
   /** findRecursively(val): search the tree for a node with value val.
    * return the node, if found; else undefined. Uses recursion. */
 
   findRecursively(val) {
+      
+      if(!this.root){
+        return undefined
+      }
+      if(this.root === val){
+        return this.root
+      }
+      let current = this.root
+      function helper(current){
+        if(current.val === val){
+          return current
+        } else if(current.val < val){
+          current = current.left
+        } else if(current.val >= val){
+          current = current.right
+        } else {
+          return undefined
+        }
+        helper(current)
+      }
+      helper(current)
+      return undefined
+
 
   }
 
@@ -69,12 +139,33 @@ class BinarySearchTree {
 
   dfsPreOrder() {
 
+
+    let current = this.root
+    let data = []
+    function traverse(node){
+      data.push(node.val)
+      if(node.left) traverse(node.left)
+      if(node.right) traverse(node.right)
+    }
+    traverse(current)
+    return data
+
   }
 
   /** dfsInOrder(): Traverse the array using in-order DFS.
    * Return an array of visited nodes. */
 
   dfsInOrder() {
+      
+      let current = this.root
+      let data = []
+      function traverse(node){
+        if(node.left) traverse(node.left)
+        data.push(node.val)
+        if(node.right) traverse(node.right)
+      }
+      traverse(current)
+      return data
 
   }
 
@@ -82,6 +173,16 @@ class BinarySearchTree {
    * Return an array of visited nodes. */
 
   dfsPostOrder() {
+      
+      let current = this.root
+      let data = []
+      function traverse(node){
+        if(node.left) traverse(node.left)
+        if(node.right) traverse(node.right)
+        data.push(node.val)
+      }
+      traverse(current)
+      return data
 
   }
 
@@ -89,6 +190,18 @@ class BinarySearchTree {
    * Return an array of visited nodes. */
 
   bfs() {
+    
+    let current = this.root
+    let data = []
+    let queue = []
+    queue.push(current)
+    while(queue.length){
+      current = queue.shift()
+      data.push(current.val)
+      if(current.left) queue.push(current.left)
+      if(current.right) queue.push(current.right)
+    }
+    return data
 
   }
 
