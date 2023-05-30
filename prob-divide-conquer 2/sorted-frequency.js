@@ -1,18 +1,42 @@
 function sortedFrequency(arr, x) {
 
-    let leftIdx = 0
-    let rightIdx = arr.length - 1
-    let midIdx = Math.floor(leftIdx + rightIdx) / 2
-    let oneQ = Math.floor((leftIdx + rightIdx) / 4)
-    let threeQ = Math.floor(((leftIdx + rightIdx) / 4) * 3)
+    let left = 0
+    let right = arr.length - 1
+    let mid = Math.floor((left + right) / 2)
+    let mid1;
+    let mid2;
+    let count = 0
 
-    while(leftIdx <= rightIdx)
-    midIdx = Math.floor(leftIdx + rightIdx) / 2
-
-
+    while (left <= right) {
+       
+        if(arr[mid] === x) {
+            count++
+            mid1 = mid - 1
+            mid2 = mid + 1
+            while(arr[mid1] === x) {
+                count++
+                mid1--
+            }
+            while(arr[mid2] === x) {
+                count++
+                mid2++
+            }
+            if(count === 0) {
+                return -1
+        } else {
+            return count
+        }
+        return -1
     
+    }
 
 
-}
+
+
+
+
+
+
+}}
 
 module.exports = sortedFrequency

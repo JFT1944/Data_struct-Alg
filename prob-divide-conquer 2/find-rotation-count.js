@@ -2,42 +2,33 @@ function findRotationCount(arr) {
 
 
 
-    // let leftIdx = 0
-    // let rightIdx = arr.length -1
-    // let middleIdx = Math.floor((rightIdx + leftIdx) / 2)
-    // let changingNumber = 0
+    let left = 0
+    let right = arr.length - 1
+    let mid = Math.floor((left + right) / 2)
+    let mid1;
+    let mid2;
 
-    // while (leftIdx <= rightIdx){
-    
-    //     middleIdx = Math.floor((rightIdx + leftIdx) / 2)
-    
-    
-    // }
-
-
-    let finalNum = 0
-    let lastNum = 0;
-    let counter = 0
-    console.log('###########')
-    for(let i of arr){
-        // console.log([finalNum, lastNum, counter, i])
-        if (lastNum > i){
-            // console.log('lesserNum')
-            finalNum = counter
+    while (left <= right) {
+        if (arr[mid] < arr[mid - 1]) {
+            return mid
         }
-        lastNum = i
-        counter++
+        if (arr[left] < arr[mid]) {
+            left = mid + 1
+        }
+        else {
+            right = mid - 1
+        }
+        if(arr[mid] > arr[mid + 1]) {
+            return mid + 1
+        }
+        mid = Math.floor((left + right) / 2)
     }
-
-return finalNum
+    return 0
     
-  
+
+
+
 }
-
-
-
-
-
 
 console.log(findRotationCount([15, 18, 2, 3, 6, 12]))
 console.log(findRotationCount([7, 9, 11, 12, 5]))

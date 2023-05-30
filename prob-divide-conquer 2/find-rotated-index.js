@@ -1,13 +1,41 @@
 
 function findRotatedIndex(arr, x) {
 
+console.log(arr)
+let arrLength = arr.length
+let left = 0
+let right = arrLength - 1
+let mid = Math.floor((left + right) / 2)
+let mid1;
+let mid2;
 
+while (left <= right) {
+    if(arr[mid] === x) {
+        return mid
+    }
+    if(arr[left] < arr[mid]) {
+        if(x >= arr[left] && x < arr[mid]) {
+            right = mid - 1
+        } else {
+            left = mid + 1
+        }
+    }
+    else {
+        if(x > arr[mid] && x <= arr[right]) {
+            left = mid + 1
+        } else {
+            right = mid - 1
+        }
+    }
+    mid = Math.floor((left + right) / 2)
 
 
 
 
 
  
+}
+    return -1
 }
 
 
