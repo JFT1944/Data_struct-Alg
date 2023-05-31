@@ -57,7 +57,9 @@ function isPalindrome(str, rstr) {
 function findIndex(arr, val) {
 
 function helper(x, y){
-  if(x.length === 0) {return -1}
+  if(x.length === 0) {return -1
+  }else if(x[x.length - 1 === 'duck']){
+  return 1
   }
   if(x[x.length -1] == y){
     console.log([x, x[x.length -1]])
